@@ -1,0 +1,2490 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ENEM Master - Plataforma Completa</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #1a237e;
+            --secondary-color: #283593;
+            --accent-color: #3949ab;
+            --success-color: #2e7d32;
+            --warning-color: #f9a825;
+            --danger-color: #c62828;
+            --light-color: #f5f7ff;
+            --dark-color: #0d1b2a;
+            --text-color: #333;
+            --border-radius: 10px;
+            --box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7ff 0%, #e3f2fd 100%);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* HEADER */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1.2rem 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+            color: white;
+        }
+
+        .logo-icon {
+            background: var(--accent-color);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+        }
+
+        .logo-text h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .logo-text p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            background: rgba(255,255,255,0.15);
+            transform: translateY(-2px);
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(255,255,255,0.1);
+            padding: 8px 15px;
+            border-radius: 25px;
+        }
+
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* DASHBOARD */
+        .dashboard {
+            padding: 30px 0;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            border-left: 5px solid var(--accent-color);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--accent-color), #5c6bc0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .stat-content h3 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .stat-content p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .progress-stat .progress-bar {
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            margin-top: 15px;
+            overflow: hidden;
+        }
+
+        .progress-stat .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--success-color), #4caf50);
+            border-radius: 4px;
+            width: 0%;
+            transition: width 1.5s ease;
+        }
+
+        /* MAIN CONTENT */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .content-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .section-title h2 {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+        }
+
+        .section-title i {
+            color: var(--accent-color);
+            font-size: 1.3rem;
+        }
+
+        /* CALENDAR */
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .current-date {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .calendar-nav button {
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: var(--transition);
+            margin-left: 10px;
+        }
+
+        .calendar-nav button:hover {
+            background: var(--secondary-color);
+            transform: scale(1.1);
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            border: 2px solid transparent;
+        }
+
+        .calendar-day:hover {
+            background: #f0f4ff;
+            transform: translateY(-2px);
+        }
+
+        .calendar-day.current {
+            background: var(--accent-color);
+            color: white;
+            font-weight: bold;
+        }
+
+        .calendar-day.studied {
+            background: #e8f5e9;
+            color: var(--success-color);
+            font-weight: bold;
+        }
+
+        .calendar-day.missed {
+            background: #ffebee;
+            color: var(--danger-color);
+        }
+
+        .calendar-day.has-tasks::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            width: 6px;
+            height: 6px;
+            background: var(--accent-color);
+            border-radius: 50%;
+        }
+
+        /* DAILY TASKS */
+        .daily-tasks {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .task-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 12px;
+            background: #f8f9ff;
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--accent-color);
+            transition: var(--transition);
+        }
+
+        .task-item:hover {
+            background: #f0f4ff;
+            transform: translateX(5px);
+        }
+
+        .task-item.completed {
+            background: #e8f5e9;
+            border-left-color: var(--success-color);
+            opacity: 0.9;
+        }
+
+        .task-checkbox {
+            width: 22px;
+            height: 22px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            margin-right: 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .task-checkbox.checked {
+            background: var(--success-color);
+            border-color: var(--success-color);
+            color: white;
+        }
+
+        .task-content {
+            flex: 1;
+        }
+
+        .task-content h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: var(--primary-color);
+        }
+
+        .task-content p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .task-subject {
+            display: inline-block;
+            padding: 3px 10px;
+            background: var(--accent-color);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-top: 5px;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .sidebar-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            box-shadow: var(--box-shadow);
+        }
+
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .quick-stat {
+            text-align: center;
+            padding: 15px;
+            background: #f8f9ff;
+            border-radius: var(--border-radius);
+        }
+
+        .quick-stat h4 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .quick-stat p {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .connectors-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .connector-tag {
+            background: #e8eaf6;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+
+        .connector-tag:hover {
+            background: var(--accent-color);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .connector-category {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-top: 20px;
+            font-size: 1rem;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+
+        /* TABS */
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #f0f0f0;
+            margin-bottom: 25px;
+            overflow-x: auto;
+        }
+
+        .tab {
+            padding: 12px 25px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            white-space: nowrap;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .tab:hover {
+            color: var(--accent-color);
+        }
+
+        .tab.active {
+            color: var(--accent-color);
+            border-bottom-color: var(--accent-color);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* SIMULATION */
+        .question-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: var(--box-shadow);
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .question-number {
+            background: var(--accent-color);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .question-subject {
+            background: #e8eaf6;
+            color: var(--accent-color);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .question-text {
+            font-size: 1.1rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .options-list {
+            display: grid;
+            gap: 10px;
+        }
+
+        .option {
+            padding: 15px;
+            background: #f8f9ff;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .option:hover {
+            background: #f0f4ff;
+            transform: translateX(5px);
+        }
+
+        .option.selected {
+            border-color: var(--accent-color);
+            background: #e8eaf6;
+        }
+
+        .option.correct {
+            border-color: var(--success-color);
+            background: #e8f5e9;
+        }
+
+        .option.incorrect {
+            border-color: var(--danger-color);
+            background: #ffebee;
+        }
+
+        .simulation-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: #f0f4ff;
+            color: var(--accent-color);
+        }
+
+        .btn-secondary:hover {
+            background: #e0e7ff;
+        }
+
+        .btn-success {
+            background: var(--success-color);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #1b5e20;
+        }
+
+        /* WRITING SECTION */
+        .writing-area {
+            width: 100%;
+            height: 300px;
+            padding: 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            line-height: 1.6;
+            resize: vertical;
+            transition: var(--transition);
+        }
+
+        .writing-area:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(57, 73, 171, 0.1);
+        }
+
+        .writing-stats {
+            display: flex;
+            gap: 20px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .writing-stat {
+            background: #f8f9ff;
+            padding: 10px 15px;
+            border-radius: var(--border-radius);
+            font-size: 0.9rem;
+        }
+
+        .writing-stat span {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .criteria-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .criteria-item {
+            background: #f8f9ff;
+            padding: 15px;
+            border-radius: var(--border-radius);
+        }
+
+        .criteria-item h5 {
+            color: var(--primary-color);
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        /* ANALYSIS SECTION */
+        .analysis-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .analysis-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            box-shadow: var(--box-shadow);
+        }
+
+        .analysis-title {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .score-display {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .score-bar {
+            height: 20px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+
+        .score-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-color), #5c6bc0);
+            border-radius: 10px;
+            width: 0%;
+            transition: width 1s ease;
+        }
+
+        .weakness-list {
+            list-style: none;
+        }
+
+        .weakness-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .weakness-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 50px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* MODAL */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background: white;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            overflow-y: auto;
+            position: relative;
+            animation: slideUp 0.4s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--accent-color);
+            transition: var(--transition);
+        }
+
+        .close-modal:hover {
+            transform: rotate(90deg);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1100px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .dashboard-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .calendar-grid {
+                grid-template-columns: repeat(7, 1fr);
+                gap: 5px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .calendar-grid {
+                grid-template-columns: repeat(7, 1fr);
+                font-size: 0.9rem;
+            }
+            
+            .tabs {
+                flex-wrap: wrap;
+            }
+            
+            .tab {
+                flex: 1;
+                text-align: center;
+                padding: 10px;
+            }
+        }
+
+        /* NOTIFICATIONS */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 3000;
+            animation: slideIn 0.3s ease;
+            border-left: 4px solid var(--success-color);
+            max-width: 350px;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .notification.error {
+            border-left-color: var(--danger-color);
+        }
+
+        .notification.warning {
+            border-left-color: var(--warning-color);
+        }
+
+        .notification.info {
+            border-left-color: var(--accent-color);
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>ENEM MASTER</h1>
+                        <p>20/01 a 01/10 - Plataforma Completa</p>
+                    </div>
+                </a>
+                <div class="nav-container">
+                    <nav class="nav-links">
+                        <a href="#" class="active" data-tab="dashboard"><i class="fas fa-home"></i> Dashboard</a>
+                        <a href="#" data-tab="cronograma"><i class="fas fa-calendar-alt"></i> Cronograma</a>
+                        <a href="#" data-tab="simulado"><i class="fas fa-clipboard-list"></i> Simulado</a>
+                        <a href="#" data-tab="redacao"><i class="fas fa-pen-fancy"></i> Redação</a>
+                        <a href="#" data-tab="analise"><i class="fas fa-chart-line"></i> Análise</a>
+                    </nav>
+                    <div class="user-info">
+                        <div class="user-avatar">EU</div>
+                        <div>
+                            <div class="user-name">Estudante ENEM</div>
+                            <div class="user-level">Nível: <strong>Intermediário</strong></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- DASHBOARD -->
+    <section class="dashboard">
+        <div class="container">
+            <div class="dashboard-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 id="daysCompleted">0</h3>
+                        <p>Dias Concluídos</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="daysProgress"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 id="topicsCompleted">0</h3>
+                        <p>Tópicos Estudados</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="topicsProgress"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-pen-nib"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 id="redacaoScore">0</h3>
+                        <p>Média Redação</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="redacaoProgress"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 id="simuladoScore">0%</h3>
+                        <p>Acertos Simulado</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="simuladoProgress"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+        <div class="main-content">
+            <div class="content-area">
+                <!-- DASHBOARD TAB -->
+                <div id="dashboard-tab" class="tab-content active">
+                    <div class="content-card">
+                        <div class="section-title">
+                            <i class="fas fa-fire"></i>
+                            <h2>Desempenho Geral</h2>
+                        </div>
+                        <div class="analysis-grid">
+                            <div class="analysis-card">
+                                <h4 class="analysis-title"><i class="fas fa-trophy"></i> Pontuação Geral</h4>
+                                <div class="score-display" id="overallScore">0</div>
+                                <div class="score-bar">
+                                    <div class="score-fill" id="overallProgress"></div>
+                                </div>
+                                <p>Sua pontuação geral baseada em todos os critérios</p>
+                            </div>
+                            <div class="analysis-card">
+                                <h4 class="analysis-title"><i class="fas fa-exclamation-triangle"></i> Pontos de Melhoria</h4>
+                                <ul class="weakness-list" id="weaknessList">
+                                    <li><i class="fas fa-clock"></i> Gerenciamento de tempo</li>
+                                    <li><i class="fas fa-book"></i> Revisão de tópicos antigos</li>
+                                    <li><i class="fas fa-pen"></i> Uso de conectivos na redação</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CRONOGRAMA TAB -->
+                <div id="cronograma-tab" class="tab-content">
+                    <div class="content-card">
+                        <div class="calendar-header">
+                            <div class="current-date" id="calendarMonth">Janeiro 2024</div>
+                            <div class="calendar-nav">
+                                <button id="prevMonth"><i class="fas fa-chevron-left"></i></button>
+                                <button id="nextMonth"><i class="fas fa-chevron-right"></i></button>
+                            </div>
+                        </div>
+                        <div class="calendar-grid" id="calendarGrid">
+                            <!-- Calendar will be generated here -->
+                        </div>
+                    </div>
+
+                    <div class="content-card">
+                        <div class="section-title">
+                            <i class="fas fa-tasks"></i>
+                            <h2>Tarefas do Dia</h2>
+                            <div style="margin-left: auto; font-size: 0.9rem; color: #666;" id="selectedDate">
+                                Selecione uma data no calendário
+                            </div>
+                        </div>
+                        <div class="daily-tasks" id="dailyTasks">
+                            <!-- Daily tasks will be loaded here -->
+                        </div>
+                        <div style="text-align: center; margin-top: 20px;">
+                            <button class="btn btn-primary" id="generateTasks">
+                                <i class="fas fa-plus"></i> Gerar Tarefas para Esta Data
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SIMULADO TAB -->
+                <div id="simulado-tab" class="tab-content">
+                    <div class="content-card">
+                        <div class="section-title">
+                            <i class="fas fa-clipboard-check"></i>
+                            <h2>Simulado ENEM</h2>
+                            <div style="margin-left: auto;">
+                                <span id="questionCounter">Questão 1 de 10</span>
+                            </div>
+                        </div>
+                        
+                        <div class="question-card" id="questionCard">
+                            <!-- Questions will be loaded here -->
+                        </div>
+                        
+                        <div class="simulation-controls">
+                            <button class="btn btn-secondary" id="prevQuestion">
+                                <i class="fas fa-arrow-left"></i> Anterior
+                            </button>
+                            <button class="btn btn-primary" id="nextQuestion">
+                                Próxima <i class="fas fa-arrow-right"></i>
+                            </button>
+                            <button class="btn btn-success" id="finishSimulado">
+                                <i class="fas fa-flag-checkered"></i> Finalizar Simulado
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- REDAÇÃO TAB -->
+                <div id="redacao-tab" class="tab-content">
+                    <div class="content-card">
+                        <div class="section-title">
+                            <i class="fas fa-pen-fancy"></i>
+                            <h2>Redação ENEM</h2>
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <label for="redacaoTheme"><strong>Tema da Redação:</strong></label>
+                            <input type="text" id="redacaoTheme" class="writing-area" style="height: auto; margin-top: 10px;" 
+                                   value="Os desafios do envelhecimento populacional no Brasil" placeholder="Digite o tema da redação...">
+                        </div>
+                        
+                        <textarea class="writing-area" id="redacaoText" placeholder="Digite sua redação aqui... (mínimo 7 linhas)"></textarea>
+                        
+                        <div class="writing-stats">
+                            <div class="writing-stat">Palavras: <span id="wordCount">0</span></div>
+                            <div class="writing-stat">Linhas: <span id="lineCount">0</span></div>
+                            <div class="writing-stat">Conectivos: <span id="connectorCount">0</span></div>
+                            <div class="writing-stat">Tempo estimado: <span id="writingTime">0 min</span></div>
+                        </div>
+                        
+                        <div style="margin-top: 25px;">
+                            <h4>Critérios de Avaliação ENEM:</h4>
+                            <div class="criteria-grid">
+                                <div class="criteria-item">
+                                    <h5>Domínio da Norma Culta</h5>
+                                    <p>Gramática, ortografia, pontuação</p>
+                                </div>
+                                <div class="criteria-item">
+                                    <h5>Compreensão do Tema</h5>
+                                    <p>Fuga parcial ou total do tema</p>
+                                </div>
+                                <div class="criteria-item">
+                                    <h5>Argumentação</h5>
+                                    <p>Repertório sociocultural, lógica</p>
+                                </div>
+                                <div class="criteria-item">
+                                    <h5>Coesão Textual</h5>
+                                    <p>Conectivos, organização de ideias</p>
+                                </div>
+                                <div class="criteria-item">
+                                    <h5>Proposta de Intervenção</h5>
+                                    <p>Detalhamento, viabilidade, agentes</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="simulation-controls" style="margin-top: 30px;">
+                            <button class="btn btn-secondary" id="analyzeRedacao">
+                                <i class="fas fa-search"></i> Analisar Redação
+                            </button>
+                            <button class="btn btn-success" id="saveRedacao">
+                                <i class="fas fa-save"></i> Salvar Redação
+                            </button>
+                            <button class="btn btn-primary" id="clearRedacao">
+                                <i class="fas fa-trash"></i> Limpar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ANÁLISE TAB -->
+                <div id="analise-tab" class="tab-content">
+                    <div class="content-card">
+                        <div class="section-title">
+                            <i class="fas fa-chart-bar"></i>
+                            <h2>Análise de Desempenho</h2>
+                        </div>
+                        
+                        <div class="analysis-grid">
+                            <div class="analysis-card">
+                                <h4 class="analysis-title"><i class="fas fa-book"></i> Desempenho por Matéria</h4>
+                                <canvas id="subjectChart" width="400" height="300"></canvas>
+                            </div>
+                            <div class="analysis-card">
+                                <h4 class="analysis-title"><i class="fas fa-calendar"></i> Progresso Semanal</h4>
+                                <canvas id="weeklyChart" width="400" height="300"></canvas>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 30px;">
+                            <h4>Recomendações Personalizadas</h4>
+                            <div id="recommendations" style="margin-top: 15px;">
+                                <!-- Recommendations will be loaded here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SIDEBAR -->
+            <div class="sidebar">
+                <div class="sidebar-card">
+                    <h3 class="section-title" style="border: none; padding: 0; margin: 0 0 15px 0;">
+                        <i class="fas fa-bolt"></i> Próximas Tarefas
+                    </h3>
+                    <div id="upcomingTasks">
+                        <!-- Upcoming tasks will be loaded here -->
+                    </div>
+                </div>
+
+                <div class="sidebar-card">
+                    <h3 class="section-title" style="border: none; padding: 0; margin: 0 0 15px 0;">
+                        <i class="fas fa-link"></i> Conectivos para Redação
+                    </h3>
+                    
+                    <div class="connector-category">Adição</div>
+                    <div class="connectors-grid">
+                        <div class="connector-tag">Além disso</div>
+                        <div class="connector-tag">Ademais</div>
+                        <div class="connector-tag">Outrossim</div>
+                        <div class="connector-tag">Também</div>
+                    </div>
+                    
+                    <div class="connector-category">Oposição</div>
+                    <div class="connectors-grid">
+                        <div class="connector-tag">No entanto</div>
+                        <div class="connector-tag">Porém</div>
+                        <div class="connector-tag">Contudo</div>
+                        <div class="connector-tag">Entretanto</div>
+                    </div>
+                    
+                    <div class="connector-category">Causa</div>
+                    <div class="connectors-grid">
+                        <div class="connector-tag">Porque</div>
+                        <div class="connector-tag">Pois</div>
+                        <div class="connector-tag">Uma vez que</div>
+                        <div class="connector-tag">Visto que</div>
+                    </div>
+                    
+                    <div class="connector-category">Conclusão</div>
+                    <div class="connectors-grid">
+                        <div class="connector-tag">Portanto</div>
+                        <div class="connector-tag">Assim</div>
+                        <div class="connector-tag">Logo</div>
+                        <div class="connector-tag">Dessa forma</div>
+                    </div>
+                </div>
+
+                <div class="sidebar-card">
+                    <h3 class="section-title" style="border: none; padding: 0; margin: 0 0 15px 0;">
+                        <i class="fas fa-chart-line"></i> Estatísticas Rápidas
+                    </h3>
+                    <div class="quick-stats">
+                        <div class="quick-stat">
+                            <h4 id="streakDays">0</h4>
+                            <p>Dias seguidos</p>
+                        </div>
+                        <div class="quick-stat">
+                            <h4 id="avgStudyTime">0h</h4>
+                            <p>Tempo médio/dia</p>
+                        </div>
+                        <div class="quick-stat">
+                            <h4 id="accuracyRate">0%</h4>
+                            <p>Taxa de acerto</p>
+                        </div>
+                        <div class="quick-stat">
+                            <h4 id="nextMilestone">7d</h4>
+                            <p>Próximo marco</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sidebar-card">
+                    <h3 class="section-title" style="border: none; padding: 0; margin: 0 0 15px 0;">
+                        <i class="fas fa-medal"></i> Conquistas
+                    </h3>
+                    <div id="achievements">
+                        <!-- Achievements will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>ENEM Master</h3>
+                    <p>Plataforma completa de estudos para o ENEM 2024. Cronograma personalizado, simulados, correção de redação e análise de desempenho.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Matérias</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Linguagens e Códigos</a></li>
+                        <li><a href="#">Ciências Humanas</a></li>
+                        <li><a href="#">Ciências da Natureza</a></li>
+                        <li><a href="#">Matemática</a></li>
+                        <li><a href="#">Redação</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Recursos</h3>
+                    <ul class="footer-links">
+                        <li><a href="#" data-tab="cronograma">Cronograma</a></li>
+                        <li><a href="#" data-tab="simulado">Simulado</a></li>
+                        <li><a href="#" data-tab="redacao">Redação</a></li>
+                        <li><a href="#" data-tab="analise">Análise</a></li>
+                        <li><a href="#">Material de Estudo</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contato</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-question-circle"></i> Ajuda</a></li>
+                        <li><a href="#"><i class="fas fa-bug"></i> Reportar Problema</a></li>
+                        <li><a href="#"><i class="fas fa-lightbulb"></i> Sugestões</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2024 ENEM Master - Plataforma Completa de Estudos. Desenvolvido para preparação intensiva para o ENEM.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL FOR RESULTS -->
+    <div class="modal" id="resultsModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeResults">&times;</span>
+            <div class="section-title">
+                <i class="fas fa-trophy"></i>
+                <h2>Resultados do Simulado</h2>
+            </div>
+            <div class="score-display" id="modalScore">0%</div>
+            <div class="score-bar">
+                <div class="score-fill" id="modalProgress"></div>
+            </div>
+            <div style="text-align: center; margin: 20px 0;">
+                <h4 id="modalMessage">Carregando resultados...</h4>
+            </div>
+            <div class="analysis-grid">
+                <div class="analysis-card">
+                    <h4 class="analysis-title"><i class="fas fa-check-circle"></i> Acertos por Matéria</h4>
+                    <div id="modalSubjects"></div>
+                </div>
+                <div class="analysis-card">
+                    <h4 class="analysis-title"><i class="fas fa-lightbulb"></i> Recomendações</h4>
+                    <div id="modalRecommendations"></div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 30px;">
+                <button class="btn btn-primary" id="reviewSimulado">
+                    <i class="fas fa-search"></i> Revisar Questões
+                </button>
+                <button class="btn btn-secondary" id="closeModalBtn">
+                    <i class="fas fa-times"></i> Fechar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- NOTIFICATION AREA -->
+    <div id="notificationArea"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // DADOS COMPLETOS DO CRONOGRAMA (255 dias - 20/01 a 01/10)
+        const startDate = new Date(2024, 0, 20); // 20 de janeiro de 2024
+        const endDate = new Date(2024, 9, 1); // 1 de outubro de 2024
+        
+        // Total de dias do cronograma
+        const totalDays = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24)) + 1;
+        
+        // Todos os tópicos das suas imagens organizados por matéria
+        const allSubjects = {
+            "LINGUAGENS": {
+                topics: [
+                    "Variedades Linguísticas", "Arte e Cultura", "Estratégias Argumentativas",
+                    "Interpretação de Texto", "Linguagem Digital", "Figuras de Linguagem",
+                    "Funções da Linguagem", "Gêneros Literários", "Escolas Literárias"
+                ],
+                color: "#2196f3"
+            },
+            "HISTÓRIA GERAL": {
+                topics: [
+                    "Pré-História", "Egito Antigo", "Mesopotâmia e Pérsia", "Grécia Antiga",
+                    "Civilização Romana", "Império Bizantino", "Sistema Feudal", "Baixa Idade Média",
+                    "Renascimento e Mercantilismo", "Absolutismo e Revolução Industrial",
+                    "Iluminismo e Independência dos EUA", "Revolução Francesa",
+                    "Era Napoleônica e Neocolonialismo", "1ª e 2ª Guerra Mundial", "Guerra Fria"
+                ],
+                color: "#f44336"
+            },
+            "HIST. DO BRASIL": {
+                topics: [
+                    "Expansão Mercantil", "Grandes Navegações", "Sistema Colonial",
+                    "Expansão Territorial", "Economia Mineradora", "Processo de Independência",
+                    "Primeiro Reinado", "Período Regencial", "Segundo Reinado", "República da Espada",
+                    "República Oligárquica", "Era Vargas", "Regime Militar"
+                ],
+                color: "#4caf50"
+            },
+            "GEOGRAFIA": {
+                topics: [
+                    "Agricultura", "Geografia Urbana", "Geografia Populacional", "Globalização",
+                    "Cidadania", "Cartografia", "Estrutura da Terra", "Fontes de Energia",
+                    "Questão Ambiental", "Atualidades"
+                ],
+                color: "#ff9800"
+            },
+            "FILO/SOCIO": {
+                topics: [
+                    "Escola Helenística", "Racionalismo Moderno", "Escola Sofística",
+                    "Aristóteles, Sócrates e Platão", "Filosofia Medieval e Moderna",
+                    "Escola de Frankfurt", "Immanuel Kant e Nietzsche", "Sociologia Contemporânea",
+                    "Cidadania, Cultura e Educação", "Política, Poder e Estado", "Capitalismo",
+                    "Economia e Sociedade", "Indústria Cultural", "Max Weber"
+                ],
+                color: "#9c27b0"
+            },
+            "BIOLOGIA": {
+                topics: [
+                    "Origem da Vida", "Ecologia", "Bioquímica", "Citologia", "Parasitologia",
+                    "Metabolismo Energético", "Histologia", "Genética e Biotecnologia",
+                    "Taxonomia Sistemática", "Reinos Biológicos", "Biomas", "Fisiologia Humana"
+                ],
+                color: "#009688"
+            },
+            "FÍSICA": {
+                topics: [
+                    "Unidades de Medida", "Movimento e Lançamentos", "Dinâmica e Leis de Newton",
+                    "Equilíbrio", "Hidrostática", "Trabalho e Energia", "Gravitação",
+                    "Termologia", "Óptica Geométrica", "Ondas", "Eletrostática", "Eletrodinâmica"
+                ],
+                color: "#3f51b5"
+            },
+            "QUÍMICA": {
+                topics: [
+                    "Estudo da Matéria", "Estrutura Atômica", "Tabela Periódica",
+                    "Funções Inorgânicas", "Estequiometria", "Solubilidade", "Termoquímica"
+                ],
+                color: "#795548"
+            },
+            "MATEMÁTICA": {
+                topics: [
+                    "Matemática Básica", "Trigonométrica", "Probabilidade", "PA e PG",
+                    "Interpretação de gráficos e tabelas", "Porcentagem", "Escala",
+                    "Função do 1º e 2º Grau", "Média, moda e mediana", "Matemática Financeira",
+                    "Estatística", "Geometria Analítica, Plana e Espacial", "Análise combinatória"
+                ],
+                color: "#607d8b"
+            },
+            "REDAÇÃO": {
+                topics: [
+                    "Estrutura da Redação", "Tese e Argumentação", "Conectivos",
+                    "Proposta de Intervenção", "Coesão e Coerência", "Repertório Sociocultural",
+                    "Prática de Redação", "Correção de Redação"
+                ],
+                color: "#e91e63"
+            }
+        };
+
+        // Banco de questões para o simulado
+        const questionBank = [
+            {
+                id: 1,
+                subject: "LINGUAGENS",
+                text: "No texto 'A hora da estrela', de Clarice Lispector, a narradora reflete sobre a personagem Macabéa e sua condição social. Essa reflexão caracteriza uma narrativa que privilegia:",
+                options: [
+                    "A descrição objetiva dos fatos sociais",
+                    "O fluxo de consciência e a introspecção psicológica",
+                    "A linguagem técnica e informativa",
+                    "A estrutura cronológica linear dos eventos"
+                ],
+                correct: 1,
+                explanation: "Clarice Lispector é conhecida por sua prosa introspectiva e fluxo de consciência, explorando a psicologia das personagens."
+            },
+            {
+                id: 2,
+                subject: "HISTÓRIA GERAL",
+                text: "A Revolução Industrial, iniciada na Inglaterra no século XVIII, provocou transformações profundas na organização do trabalho. Uma dessas transformações foi:",
+                options: [
+                    "O fortalecimento do sistema corporativo medieval",
+                    "A substituição da manufatura pela maquinofatura",
+                    "O aumento do trabalho artesanal independente",
+                    "A descentralização da produção industrial"
+                ],
+                correct: 1,
+                explanation: "A Revolução Industrial caracterizou-se pela passagem da manufatura para a maquinofatura, com a introdução de máquinas nas fábricas."
+            },
+            {
+                id: 3,
+                subject: "BIOLOGIA",
+                text: "O processo de fotossíntese realizado pelas plantas é fundamental para a manutenção da vida na Terra. Durante a fase clara da fotossíntese, ocorre:",
+                options: [
+                    "Fixação do CO₂ e produção de glicose",
+                    "Produção de ATP e NADPH e liberação de O₂",
+                    "Degradação da glicose para produção de energia",
+                    "Síntese de glicose a partir de CO₂ e H₂O"
+                ],
+                correct: 1,
+                explanation: "Na fase clara da fotossíntese, há produção de ATP e NADPH (poder redutor) e liberação de O₂ a partir da fotólise da água."
+            },
+            {
+                id: 4,
+                subject: "MATEMÁTICA",
+                text: "Em uma progressão aritmética (PA), o 5º termo é 18 e o 9º termo é 34. Qual é o primeiro termo dessa PA?",
+                options: ["2", "4", "6", "8"],
+                correct: 0,
+                explanation: "Usando a fórmula an = a1 + (n-1)r, temos: a5 = a1 + 4r = 18 e a9 = a1 + 8r = 34. Subtraindo as equações: 4r = 16 → r = 4. Substituindo: a1 + 4*4 = 18 → a1 = 2."
+            },
+            {
+                id: 5,
+                subject: "QUÍMICA",
+                text: "O número atômico do elemento químico ferro é 26. Em seu estado fundamental, quantos elétrons estão presentes na camada de valência do átomo de ferro?",
+                options: ["2", "8", "14", "16"],
+                correct: 0,
+                explanation: "Configuração eletrônica do ferro (Z=26): 1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d⁶. A camada de valência é a 4ª camada (nível 4), que possui 2 elétrons no subnível 4s."
+            }
+        ];
+
+        // Dados do usuário armazenados localmente
+        let userData = {
+            daysCompleted: 0,
+            topicsCompleted: 0,
+            redacaoScores: [],
+            simulationScores: [],
+            studyHistory: {},
+            currentStreak: 0,
+            achievements: []
+        };
+
+        // Estado atual da aplicação
+        let currentState = {
+            currentDay: 1,
+            currentMonth: 0, // 0 = Janeiro
+            selectedDate: new Date(startDate),
+            currentQuestion: 0,
+            userAnswers: [],
+            simulationCompleted: false
+        };
+
+        // Inicializar a aplicação
+        document.addEventListener('DOMContentLoaded', function() {
+            loadUserData();
+            initializeDashboard();
+            initializeCalendar();
+            initializeTabs();
+            initializeSimulado();
+            initializeRedacao();
+            updateSidebar();
+            updateAllStats();
+            
+            // Adicionar listeners
+            document.getElementById('generateTasks').addEventListener('click', generateDailyTasks);
+            document.getElementById('finishSimulado').addEventListener('click', finishSimulado);
+            document.getElementById('analyzeRedacao').addEventListener('click', analyzeRedacao);
+            document.getElementById('saveRedacao').addEventListener('click', saveRedacao);
+            document.getElementById('clearRedacao').addEventListener('click', clearRedacao);
+            document.getElementById('closeResults').addEventListener('click', () => {
+                document.getElementById('resultsModal').style.display = 'none';
+            });
+            document.getElementById('closeModalBtn').addEventListener('click', () => {
+                document.getElementById('resultsModal').style.display = 'none';
+            });
+            
+            // Inicializar gráficos
+            initializeCharts();
+        });
+
+        // FUNÇÕES PRINCIPAIS
+
+        function loadUserData() {
+            const saved = localStorage.getItem('enemMasterData');
+            if (saved) {
+                userData = JSON.parse(saved);
+            }
+        }
+
+        function saveUserData() {
+            localStorage.setItem('enemMasterData', JSON.stringify(userData));
+        }
+
+        function initializeDashboard() {
+            updateDashboardStats();
+        }
+
+        function initializeCalendar() {
+            updateCalendar();
+            
+            // Adicionar listeners para navegação do calendário
+            document.getElementById('prevMonth').addEventListener('click', () => {
+                currentState.currentMonth--;
+                updateCalendar();
+            });
+            
+            document.getElementById('nextMonth').addEventListener('click', () => {
+                currentState.currentMonth++;
+                updateCalendar();
+            });
+        }
+
+        function updateCalendar() {
+            const calendarGrid = document.getElementById('calendarGrid');
+            const calendarMonth = document.getElementById('calendarMonth');
+            
+            // Limpar calendário
+            calendarGrid.innerHTML = '';
+            
+            // Configurar data atual para o mês selecionado
+            const currentDate = new Date(2024, currentState.currentMonth, 1);
+            const monthName = currentDate.toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' });
+            calendarMonth.textContent = monthName.charAt(0).toUpperCase() + monthName.slice(1);
+            
+            // Dias da semana
+            const weekdays = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+            weekdays.forEach(day => {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day';
+                dayElement.style.fontWeight = 'bold';
+                dayElement.textContent = day;
+                calendarGrid.appendChild(dayElement);
+            });
+            
+            // Primeiro dia do mês
+            const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+            const startingDay = firstDay.getDay();
+            
+            // Dias no mês
+            const daysInMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate();
+            
+            // Dias vazios no início
+            for (let i = 0; i < startingDay; i++) {
+                const emptyDay = document.createElement('div');
+                emptyDay.className = 'calendar-day';
+                calendarGrid.appendChild(emptyDay);
+            }
+            
+            // Dias do mês
+            const today = new Date();
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day';
+                dayElement.textContent = day;
+                
+                // Verificar se é uma data do cronograma
+                const date = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
+                if (date >= startDate && date <= endDate) {
+                    dayElement.classList.add('has-tasks');
+                    
+                    // Verificar se já foi estudado
+                    const dateStr = date.toISOString().split('T')[0];
+                    if (userData.studyHistory[dateStr]) {
+                        dayElement.classList.add('studied');
+                    }
+                    
+                    // Verificar se é hoje
+                    if (date.toDateString() === today.toDateString()) {
+                        dayElement.classList.add('current');
+                    }
+                    
+                    // Adicionar evento de clique
+                    dayElement.addEventListener('click', () => {
+                        currentState.selectedDate = date;
+                        updateSelectedDate();
+                        loadDailyTasks(date);
+                    });
+                }
+                
+                calendarGrid.appendChild(dayElement);
+            }
+            
+            // Atualizar data selecionada
+            updateSelectedDate();
+        }
+
+        function updateSelectedDate() {
+            const selectedDateElement = document.getElementById('selectedDate');
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            selectedDateElement.textContent = currentState.selectedDate.toLocaleDateString('pt-BR', options);
+        }
+
+        function loadDailyTasks(date) {
+            const dailyTasks = document.getElementById('dailyTasks');
+            dailyTasks.innerHTML = '';
+            
+            const dateStr = date.toISOString().split('T')[0];
+            const studiedTasks = userData.studyHistory[dateStr] || [];
+            
+            // Gerar tarefas para esta data
+            const tasks = generateTasksForDate(date);
+            
+            tasks.forEach((task, index) => {
+                const taskElement = document.createElement('div');
+                taskElement.className = 'task-item';
+                if (studiedTasks.includes(task.id)) {
+                    taskElement.classList.add('completed');
+                }
+                
+                taskElement.innerHTML = `
+                    <div class="task-checkbox ${studiedTasks.includes(task.id) ? 'checked' : ''}">
+                        ${studiedTasks.includes(task.id) ? '✓' : ''}
+                    </div>
+                    <div class="task-content">
+                        <h4>${task.title}</h4>
+                        <p>${task.description}</p>
+                        <span class="task-subject" style="background: ${task.color}">${task.subject}</span>
+                    </div>
+                `;
+                
+                // Adicionar evento para marcar como concluído
+                const checkbox = taskElement.querySelector('.task-checkbox');
+                checkbox.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    toggleTaskCompletion(dateStr, task.id, taskElement);
+                });
+                
+                dailyTasks.appendChild(taskElement);
+            });
+        }
+
+        function generateTasksForDate(date) {
+            // Calcular o dia do cronograma (1-255)
+            const dayDiff = Math.ceil((date - startDate) / (1000 * 60 * 60 * 24)) + 1;
+            
+            // Selecionar matéria baseada no dia
+            const subjects = Object.keys(allSubjects);
+            const subjectIndex = (dayDiff - 1) % subjects.length;
+            const subject = subjects[subjectIndex];
+            const subjectData = allSubjects[subject];
+            
+            // Selecionar tópicos para este dia
+            const topicsPerDay = 3;
+            const startTopic = ((dayDiff - 1) * topicsPerDay) % subjectData.topics.length;
+            const tasks = [];
+            
+            for (let i = 0; i < topicsPerDay; i++) {
+                const topicIndex = (startTopic + i) % subjectData.topics.length;
+                tasks.push({
+                    id: `${subject}-${topicIndex}-${dayDiff}`,
+                    title: subjectData.topics[topicIndex],
+                    description: `Estude este tópico por 45 minutos e faça exercícios relacionados`,
+                    subject: subject,
+                    color: subjectData.color
+                });
+            }
+            
+            // Adicionar tarefa de redação a cada 3 dias
+            if (dayDiff % 3 === 0) {
+                tasks.push({
+                    id: `REDAÇÃO-${dayDiff}`,
+                    title: "Prática de Redação",
+                    description: "Escreva uma redação sobre tema atual (mínimo 25 linhas)",
+                    subject: "REDAÇÃO",
+                    color: allSubjects.REDAÇÃO.color
+                });
+            }
+            
+            return tasks;
+        }
+
+        function generateDailyTasks() {
+            loadDailyTasks(currentState.selectedDate);
+        }
+
+        function toggleTaskCompletion(dateStr, taskId, taskElement) {
+            if (!userData.studyHistory[dateStr]) {
+                userData.studyHistory[dateStr] = [];
+            }
+            
+            const taskIndex = userData.studyHistory[dateStr].indexOf(taskId);
+            
+            if (taskIndex === -1) {
+                // Marcar como concluído
+                userData.studyHistory[dateStr].push(taskId);
+                taskElement.classList.add('completed');
+                taskElement.querySelector('.task-checkbox').classList.add('checked');
+                taskElement.querySelector('.task-checkbox').innerHTML = '✓';
+                
+                // Atualizar estatísticas
+                userData.topicsCompleted++;
+                userData.daysCompleted = Object.keys(userData.studyHistory).length;
+                
+                // Verificar conquistas
+                checkAchievements();
+                
+                // Salvar dados
+                saveUserData();
+                updateAllStats();
+                updateSidebar();
+                
+                // Mostrar notificação
+                showNotification('Tarefa concluída! +10 pontos', 'success');
+            } else {
+                // Desmarcar
+                userData.studyHistory[dateStr].splice(taskIndex, 1);
+                taskElement.classList.remove('completed');
+                taskElement.querySelector('.task-checkbox').classList.remove('checked');
+                taskElement.querySelector('.task-checkbox').innerHTML = '';
+                
+                // Atualizar estatísticas
+                userData.topicsCompleted--;
+                if (userData.studyHistory[dateStr].length === 0) {
+                    delete userData.studyHistory[dateStr];
+                    userData.daysCompleted = Object.keys(userData.studyHistory).length;
+                }
+                
+                saveUserData();
+                updateAllStats();
+                updateSidebar();
+            }
+        }
+
+        function initializeTabs() {
+            const tabs = document.querySelectorAll('.nav-links a[data-tab]');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    // Remover classe active de todas as abas
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tabContents.forEach(tc => tc.classList.remove('active'));
+                    
+                    // Adicionar classe active à aba clicada
+                    tab.classList.add('active');
+                    
+                    // Mostrar conteúdo correspondente
+                    const tabId = tab.getAttribute('data-tab');
+                    document.getElementById(`${tabId}-tab`).classList.add('active');
+                    
+                    // Atualizar conteúdo específico da aba
+                    if (tabId === 'cronograma') {
+                        updateCalendar();
+                    } else if (tabId === 'simulado') {
+                        loadQuestion(currentState.currentQuestion);
+                    } else if (tabId === 'analise') {
+                        updateCharts();
+                    }
+                });
+            });
+            
+            // Adicionar listeners para links do footer
+            document.querySelectorAll('.footer-links a[data-tab]').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const tabId = link.getAttribute('data-tab');
+                    const tabToClick = document.querySelector(`.nav-links a[data-tab="${tabId}"]`);
+                    if (tabToClick) tabToClick.click();
+                });
+            });
+        }
+
+        function initializeSimulado() {
+            document.getElementById('prevQuestion').addEventListener('click', () => {
+                if (currentState.currentQuestion > 0) {
+                    currentState.currentQuestion--;
+                    loadQuestion(currentState.currentQuestion);
+                }
+            });
+            
+            document.getElementById('nextQuestion').addEventListener('click', () => {
+                if (currentState.currentQuestion < questionBank.length - 1) {
+                    currentState.currentQuestion++;
+                    loadQuestion(currentState.currentQuestion);
+                }
+            });
+            
+            // Inicializar primeira questão
+            loadQuestion(currentState.currentQuestion);
+        }
+
+        function loadQuestion(index) {
+            const question = questionBank[index];
+            const questionCard = document.getElementById('questionCard');
+            const questionCounter = document.getElementById('questionCounter');
+            
+            questionCounter.textContent = `Questão ${index + 1} de ${questionBank.length}`;
+            
+            let optionsHtml = '';
+            question.options.forEach((option, optIndex) => {
+                const isSelected = currentState.userAnswers[index] === optIndex;
+                const isCorrect = question.correct === optIndex;
+                let optionClass = 'option';
+                
+                if (currentState.simulationCompleted) {
+                    if (isCorrect) optionClass += ' correct';
+                    if (isSelected && !isCorrect) optionClass += ' incorrect';
+                } else if (isSelected) {
+                    optionClass += ' selected';
+                }
+                
+                optionsHtml += `
+                    <div class="${optionClass}" data-option="${optIndex}">
+                        ${String.fromCharCode(65 + optIndex)}) ${option}
+                    </div>
+                `;
+            });
+            
+            questionCard.innerHTML = `
+                <div class="question-header">
+                    <div class="question-number">${index + 1}</div>
+                    <div class="question-subject">${question.subject}</div>
+                </div>
+                <div class="question-text">
+                    ${question.text}
+                </div>
+                <div class="options-list">
+                    ${optionsHtml}
+                </div>
+                ${currentState.simulationCompleted ? `
+                    <div style="margin-top: 20px; padding: 15px; background: #f8f9ff; border-radius: var(--border-radius);">
+                        <strong>Explicação:</strong> ${question.explanation}
+                    </div>
+                ` : ''}
+            `;
+            
+            // Adicionar eventos às opções se o simulado não foi finalizado
+            if (!currentState.simulationCompleted) {
+                document.querySelectorAll('.option').forEach(option => {
+                    option.addEventListener('click', function() {
+                        const selectedOption = parseInt(this.getAttribute('data-option'));
+                        currentState.userAnswers[index] = selectedOption;
+                        loadQuestion(index); // Recarregar para mostrar seleção
+                    });
+                });
+            }
+            
+            // Atualizar estado dos botões de navegação
+            document.getElementById('prevQuestion').disabled = index === 0;
+            document.getElementById('nextQuestion').disabled = index === questionBank.length - 1;
+        }
+
+        function finishSimulado() {
+            // Verificar se todas as questões foram respondidas
+            const unanswered = questionBank.filter((_, index) => 
+                currentState.userAnswers[index] === undefined
+            ).length;
+            
+            if (unanswered > 0) {
+                showNotification(`Você tem ${unanswered} questão(ões) não respondida(s)`, 'warning');
+                return;
+            }
+            
+            // Calcular pontuação
+            let correct = 0;
+            questionBank.forEach((question, index) => {
+                if (currentState.userAnswers[index] === question.correct) {
+                    correct++;
+                }
+            });
+            
+            const score = Math.round((correct / questionBank.length) * 100);
+            
+            // Salvar pontuação
+            userData.simulationScores.push({
+                date: new Date().toISOString(),
+                score: score,
+                correct: correct,
+                total: questionBank.length
+            });
+            
+            // Atualizar média
+            const avgScore = userData.simulationScores.reduce((sum, s) => sum + s.score, 0) / 
+                            userData.simulationScores.length;
+            
+            // Mostrar resultados
+            currentState.simulationCompleted = true;
+            document.getElementById('modalScore').textContent = `${score}%`;
+            document.getElementById('modalProgress').style.width = `${score}%`;
+            
+            let message = '';
+            if (score >= 90) message = 'Excelente! Você está dominando o conteúdo!';
+            else if (score >= 70) message = 'Muito bom! Continue estudando!';
+            else if (score >= 50) message = 'Bom, mas há espaço para melhorar!';
+            else message = 'Estude mais os conteúdos com menor desempenho.';
+            
+            document.getElementById('modalMessage').textContent = message;
+            
+            // Calcular acertos por matéria
+            const subjectStats = {};
+            questionBank.forEach((question, index) => {
+                if (!subjectStats[question.subject]) {
+                    subjectStats[question.subject] = { correct: 0, total: 0 };
+                }
+                subjectStats[question.subject].total++;
+                if (currentState.userAnswers[index] === question.correct) {
+                    subjectStats[question.subject].correct++;
+                }
+            });
+            
+            let subjectHtml = '';
+            for (const [subject, stats] of Object.entries(subjectStats)) {
+                const percentage = Math.round((stats.correct / stats.total) * 100);
+                subjectHtml += `
+                    <div style="margin-bottom: 10px;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>${subject}</span>
+                            <span>${stats.correct}/${stats.total} (${percentage}%)</span>
+                        </div>
+                        <div class="score-bar" style="height: 6px; margin-top: 5px;">
+                            <div class="score-fill" style="width: ${percentage}%"></div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            document.getElementById('modalSubjects').innerHTML = subjectHtml;
+            
+            // Gerar recomendações
+            let recommendations = '<ul style="list-style: none; padding: 0;">';
+            for (const [subject, stats] of Object.entries(subjectStats)) {
+                const percentage = Math.round((stats.correct / stats.total) * 100);
+                if (percentage < 70) {
+                    recommendations += `<li><i class="fas fa-exclamation-circle"></i> Reforce estudos em ${subject}</li>`;
+                }
+            }
+            recommendations += `<li><i class="fas fa-clock"></i> Pratique gestão do tempo</li>`;
+            recommendations += `<li><i class="fas fa-book"></i> Revise questões erradas</li>`;
+            recommendations += '</ul>';
+            
+            document.getElementById('modalRecommendations').innerHTML = recommendations;
+            
+            // Mostrar modal
+            document.getElementById('resultsModal').style.display = 'flex';
+            
+            // Salvar dados
+            saveUserData();
+            updateAllStats();
+        }
+
+        function initializeRedacao() {
+            const textarea = document.getElementById('redacaoText');
+            
+            textarea.addEventListener('input', function() {
+                updateWritingStats();
+            });
+            
+            // Inicializar estatísticas
+            updateWritingStats();
+        }
+
+        function updateWritingStats() {
+            const text = document.getElementById('redacaoText').value;
+            
+            // Contar palavras
+            const words = text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
+            document.getElementById('wordCount').textContent = words;
+            
+            // Contar linhas
+            const lines = text.trim() === '' ? 0 : text.split('\n').length;
+            document.getElementById('lineCount').textContent = lines;
+            
+            // Contar conectivos
+            const connectors = ['além disso', 'portanto', 'contudo', 'entretanto', 'no entanto', 
+                               'assim', 'logo', 'dessa forma', 'porém', 'todavia', 'embora',
+                               'consequentemente', 'por consequência', 'em virtude', 'visto que'];
+            let connectorCount = 0;
+            connectors.forEach(connector => {
+                const regex = new RegExp(connector, 'gi');
+                const matches = text.match(regex);
+                if (matches) connectorCount += matches.length;
+            });
+            document.getElementById('connectorCount').textContent = connectorCount;
+            
+            // Calcular tempo estimado
+            const estimatedTime = Math.max(5, Math.ceil(words / 20));
+            document.getElementById('writingTime').textContent = `${estimatedTime} min`;
+        }
+
+        function analyzeRedacao() {
+            const text = document.getElementById('redacaoText').value.trim();
+            
+            if (text.length < 100) {
+                showNotification('Sua redação está muito curta. Escreva pelo menos 20 linhas.', 'warning');
+                return;
+            }
+            
+            // Análise básica da redação
+            let score = 0;
+            let feedback = [];
+            
+            // Verificar tamanho
+            if (text.length >= 800) score += 200;
+            else if (text.length >= 600) score += 150;
+            else if (text.length >= 400) score += 100;
+            else score += 50;
+            
+            // Verificar conectivos
+            const connectors = ['além disso', 'portanto', 'contudo', 'entretanto', 'no entanto', 
+                               'assim', 'logo', 'dessa forma', 'porém', 'todavia', 'embora',
+                               'consequentemente', 'por consequência', 'em virtude', 'visto que'];
+            let connectorCount = 0;
+            connectors.forEach(connector => {
+                const regex = new RegExp(connector, 'gi');
+                const matches = text.match(regex);
+                if (matches) connectorCount += matches.length;
+            });
+            
+            if (connectorCount >= 8) score += 200;
+            else if (connectorCount >= 5) score += 150;
+            else if (connectorCount >= 3) score += 100;
+            else score += 50;
+            
+            // Verificar parágrafos
+            const paragraphs = text.split('\n\n').filter(p => p.trim().length > 0);
+            if (paragraphs.length >= 4) score += 200;
+            else if (paragraphs.length >= 3) score += 150;
+            else score += 100;
+            
+            // Verificar estrutura básica
+            const hasIntroduction = text.toLowerCase().includes('introdução') || 
+                                   (paragraphs.length > 0 && paragraphs[0].length > 50);
+            const hasConclusion = text.toLowerCase().includes('conclusão') || 
+                                 text.toLowerCase().includes('portanto') ||
+                                 text.toLowerCase().includes('assim') ||
+                                 (paragraphs.length > 0 && paragraphs[paragraphs.length - 1].length > 50);
+            
+            if (hasIntroduction && hasConclusion) score += 200;
+            else if (hasIntroduction || hasConclusion) score += 100;
+            
+            // Gerar feedback
+            if (connectorCount < 3) {
+                feedback.push('Use mais conectivos para melhorar a coesão');
+            }
+            if (paragraphs.length < 4) {
+                feedback.push('Estruture melhor sua redação em parágrafos');
+            }
+            if (text.length < 600) {
+                feedback.push('Desenvolva mais suas ideias');
+            }
+            
+            // Mostrar análise
+            let analysisHtml = `
+                <div style="background: #f8f9ff; padding: 20px; border-radius: var(--border-radius);">
+                    <h4 style="color: var(--primary-color); margin-bottom: 15px;">Análise da Redação</h4>
+                    <div class="score-display" style="font-size: 2.5rem;">${score}/800</div>
+                    <div class="score-bar">
+                        <div class="score-fill" style="width: ${(score/800)*100}%"></div>
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <h5>Pontos fortes:</h5>
+                        <ul>
+                            <li>Tamanho adequado da redação</li>
+                            <li>Uso de ${connectorCount} conectivos textuais</li>
+                            <li>${paragraphs.length} parágrafos estruturados</li>
+                        </ul>
+                        <h5 style="margin-top: 15px;">Sugestões de melhoria:</h5>
+                        <ul>
+                            ${feedback.map(item => `<li>${item}</li>`).join('')}
+                        </ul>
+                    </div>
+                </div>
+            `;
+            
+            showNotification('Redação analisada com sucesso!', 'success');
+            
+            // Adicionar ao conteúdo de análise
+            const analysisTab = document.getElementById('analise-tab');
+            analysisTab.innerHTML += analysisHtml;
+            
+            // Navegar para a aba de análise
+            document.querySelector('.nav-links a[data-tab="analise"]').click();
+        }
+
+        function saveRedacao() {
+            const text = document.getElementById('redacaoText').value.trim();
+            const theme = document.getElementById('redacaoTheme').value.trim();
+            
+            if (text.length < 100) {
+                showNotification('Redação muito curta para salvar', 'warning');
+                return;
+            }
+            
+            // Simular pontuação
+            const score = Math.floor(Math.random() * 201) + 600; // 600-800
+            
+            // Adicionar à lista de redações
+            userData.redacaoScores.push({
+                date: new Date().toISOString(),
+                theme: theme,
+                score: score,
+                text: text.substring(0, 500) + '...' // Salvar apenas parte do texto
+            });
+            
+            // Salvar dados
+            saveUserData();
+            updateAllStats();
+            
+            showNotification(`Redação salva! Pontuação estimada: ${score}`, 'success');
+        }
+
+        function clearRedacao() {
+            if (confirm('Tem certeza que deseja limpar a redação?')) {
+                document.getElementById('redacaoText').value = '';
+                updateWritingStats();
+                showNotification('Redação limpa com sucesso', 'info');
+            }
+        }
+
+        function updateSidebar() {
+            // Próximas tarefas
+            const upcomingTasks = document.getElementById('upcomingTasks');
+            const today = new Date();
+            const tomorrow = new Date(today);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            
+            const tasks = generateTasksForDate(tomorrow).slice(0, 3);
+            
+            let tasksHtml = '';
+            tasks.forEach(task => {
+                tasksHtml += `
+                    <div style="margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #eee;">
+                        <div style="font-weight: 500; color: var(--primary-color);">${task.title}</div>
+                        <div style="font-size: 0.85rem; color: #666; margin-top: 5px;">${task.subject}</div>
+                    </div>
+                `;
+            });
+            
+            upcomingTasks.innerHTML = tasksHtml || '<p style="color: #666; text-align: center;">Nenhuma tarefa agendada</p>';
+            
+            // Estatísticas rápidas
+            const streak = calculateStreak();
+            document.getElementById('streakDays').textContent = streak;
+            
+            const avgTime = Math.round(userData.topicsCompleted * 0.75);
+            document.getElementById('avgStudyTime').textContent = `${avgTime}h`;
+            
+            const accuracy = userData.simulationScores.length > 0 ?
+                Math.round(userData.simulationScores.reduce((a, b) => a + b.score, 0) / 
+                          userData.simulationScores.length) : 0;
+            document.getElementById('accuracyRate').textContent = `${accuracy}%`;
+            
+            const nextMilestone = Math.max(1, 7 - (userData.daysCompleted % 7));
+            document.getElementById('nextMilestone').textContent = `${nextMilestone}d`;
+            
+            // Conquistas
+            updateAchievements();
+        }
+
+        function calculateStreak() {
+            if (!userData.studyHistory || Object.keys(userData.studyHistory).length === 0) {
+                return 0;
+            }
+            
+            const dates = Object.keys(userData.studyHistory)
+                .map(d => new Date(d))
+                .sort((a, b) => b - a);
+            
+            if (dates.length === 0) return 0;
+            
+            let streak = 1;
+            let currentDate = dates[0];
+            
+            for (let i = 1; i < dates.length; i++) {
+                const diff = Math.floor((currentDate - dates[i]) / (1000 * 60 * 60 * 24));
+                if (diff === 1) {
+                    streak++;
+                    currentDate = dates[i];
+                } else {
+                    break;
+                }
+            }
+            
+            return streak;
+        }
+
+        function updateAchievements() {
+            const achievements = document.getElementById('achievements');
+            const userAchievements = [];
+            
+            // Conquistas baseadas no progresso
+            if (userData.daysCompleted >= 1) {
+                userAchievements.push({ name: 'Início da Jornada', icon: '🚀' });
+            }
+            if (userData.daysCompleted >= 7) {
+                userAchievements.push({ name: '1ª Semana', icon: '📅' });
+            }
+            if (userData.daysCompleted >= 30) {
+                userAchievements.push({ name: 'Mestre do Mês', icon: '👑' });
+            }
+            if (userData.topicsCompleted >= 50) {
+                userAchievements.push({ name: '50 Tópicos', icon: '📚' });
+            }
+            if (userData.redacaoScores.length >= 5) {
+                userAchievements.push({ name: 'Escritor Profissional', icon: '✍️' });
+            }
+            
+            let achievementsHtml = '';
+            userAchievements.forEach(achievement => {
+                achievementsHtml += `
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                        <div style="font-size: 1.5rem;">${achievement.icon}</div>
+                        <div>
+                            <div style="font-weight: 500;">${achievement.name}</div>
+                            <div style="font-size: 0.8rem; color: #666;">Conquistado</div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            achievements.innerHTML = achievementsHtml || 
+                '<p style="color: #666; text-align: center;">Complete tarefas para desbloquear conquistas!</p>';
+        }
+
+        function checkAchievements() {
+            // Verificar e adicionar conquistas
+            const newAchievements = [];
+            
+            if (userData.daysCompleted >= 7 && !userData.achievements.includes('1ª Semana')) {
+                newAchievements.push('1ª Semana');
+            }
+            if (userData.topicsCompleted >= 50 && !userData.achievements.includes('50 Tópicos')) {
+                newAchievements.push('50 Tópicos');
+            }
+            
+            if (newAchievements.length > 0) {
+                userData.achievements.push(...newAchievements);
+                newAchievements.forEach(achievement => {
+                    showNotification(`Conquista desbloqueada: ${achievement}!`, 'success');
+                });
+                saveUserData();
+            }
+        }
+
+        function updateAllStats() {
+            updateDashboardStats();
+            updateSidebar();
+        }
+
+        function updateDashboardStats() {
+            // Dias concluídos
+            const daysCompleted = userData.daysCompleted;
+            const daysProgress = (daysCompleted / totalDays) * 100;
+            document.getElementById('daysCompleted').textContent = daysCompleted;
+            document.getElementById('daysProgress').style.width = `${daysProgress}%`;
+            
+            // Tópicos estudados
+            const topicsCompleted = userData.topicsCompleted;
+            const totalTopics = Object.values(allSubjects).reduce((sum, subject) => 
+                sum + subject.topics.length, 0);
+            const topicsProgress = (topicsCompleted / totalTopics) * 100;
+            document.getElementById('topicsCompleted').textContent = topicsCompleted;
+            document.getElementById('topicsProgress').style.width = `${topicsProgress}%`;
+            
+            // Média redação
+            const redacaoAvg = userData.redacaoScores.length > 0 ?
+                Math.round(userData.redacaoScores.reduce((sum, r) => sum + r.score, 0) / 
+                          userData.redacaoScores.length) : 0;
+            document.getElementById('redacaoScore').textContent = redacaoAvg;
+            document.getElementById('redacaoProgress').style.width = `${(redacaoAvg/800)*100}%`;
+            
+            // Média simulado
+            const simuladoAvg = userData.simulationScores.length > 0 ?
+                Math.round(userData.simulationScores.reduce((sum, s) => sum + s.score, 0) / 
+                          userData.simulationScores.length) : 0;
+            document.getElementById('simuladoScore').textContent = `${simuladoAvg}%`;
+            document.getElementById('simuladoProgress').style.width = `${simuladoAvg}%`;
+            
+            // Pontuação geral
+            const overallScore = Math.round(
+                (daysProgress * 0.2) + 
+                (topicsProgress * 0.3) + 
+                ((redacaoAvg/800)*100 * 0.3) + 
+                (simuladoAvg * 0.2)
+            );
+            document.getElementById('overallScore').textContent = overallScore;
+            document.getElementById('overallProgress').style.width = `${overallScore}%`;
+        }
+
+        function initializeCharts() {
+            // Gráfico de desempenho por matéria
+            const subjectCtx = document.getElementById('subjectChart').getContext('2d');
+            window.subjectChart = new Chart(subjectCtx, {
+                type: 'radar',
+                data: {
+                    labels: Object.keys(allSubjects),
+                    datasets: [{
+                        label: 'Desempenho',
+                        data: Object.keys(allSubjects).map(() => Math.random() * 100),
+                        backgroundColor: 'rgba(57, 73, 171, 0.2)',
+                        borderColor: 'rgba(57, 73, 171, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: Object.values(allSubjects).map(s => s.color)
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            angleLines: { display: true },
+                            suggestedMin: 0,
+                            suggestedMax: 100
+                        }
+                    }
+                }
+            });
+            
+            // Gráfico de progresso semanal
+            const weeklyCtx = document.getElementById('weeklyChart').getContext('2d');
+            window.weeklyChart = new Chart(weeklyCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+                    datasets: [{
+                        label: 'Tópicos Estudados',
+                        data: [5, 8, 6, 9, 7, 4, 6],
+                        backgroundColor: 'rgba(57, 73, 171, 0.1)',
+                        borderColor: 'rgba(57, 73, 171, 1)',
+                        borderWidth: 3,
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 10
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateCharts() {
+            if (window.subjectChart) {
+                // Atualizar dados do gráfico de matérias
+                const newData = Object.keys(allSubjects).map(() => 
+                    Math.min(100, Math.random() * 30 + userData.daysCompleted * 2)
+                );
+                window.subjectChart.data.datasets[0].data = newData;
+                window.subjectChart.update();
+            }
+            
+            if (window.weeklyChart) {
+                // Atualizar dados do gráfico semanal
+                const days = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'];
+                const today = new Date().getDay();
+                const newWeeklyData = days.map((_, index) => {
+                    const dayOffset = (index - today + 7) % 7;
+                    const targetDate = new Date();
+                    targetDate.setDate(targetDate.getDate() - dayOffset);
+                    const dateStr = targetDate.toISOString().split('T')[0];
+                    return userData.studyHistory[dateStr] ? userData.studyHistory[dateStr].length : 0;
+                });
+                
+                window.weeklyChart.data.datasets[0].data = newWeeklyData;
+                window.weeklyChart.update();
+            }
+        }
+
+        function showNotification(message, type = 'info') {
+            const notificationArea = document.getElementById('notificationArea');
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : 
+                                      type === 'warning' ? 'exclamation-triangle' : 
+                                      type === 'error' ? 'times-circle' : 'info-circle'}"></i>
+                    <div>${message}</div>
+                </div>
+            `;
+            
+            notificationArea.appendChild(notification);
+            
+            // Remover após 5 segundos
+            setTimeout(() => {
+                notification.style.animation = 'slideIn 0.3s ease reverse';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 5000);
+        }
+
+        // Inicializar gráficos quando a página carregar
+        window.addEventListener('load', initializeCharts);
+    </script>
+</body>
+</html>
